@@ -1,0 +1,78 @@
+<%- include("./partials/header.ejs");  %>
+
+
+
+<div class="grid-container">
+
+<div class="grid-item a hero">
+
+<div class="bg-dark text-secondary px-4 py-5 text-center"> 
+    <div class="py-5"> 
+        <h1 class="display-5 fw-bold text-white">Home Page</h1> 
+        <div class="col-lg-6 mx-auto"> 
+            <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> 
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                
+    
+                <form class="heroBtns">
+        
+                    <textarea class=" postBox d-none" placeholder="Write something.." name="postContent"><%= textAreaContent %> </textarea>
+                    <button type="submit" class="postBtn d-none btn btn-outline-info btn-lg me-sm-3 px-4 fw-bold" formaction="/new-post" formmethod="POST">Post</button>
+                    <button type="button" class="cancelBtn d-none btn btn-outline-light btn-lg px-4">Cancel</button>
+
+                    <button type="button" class="btn btn-outline-info btn-lg me-sm-3 px-4 fw-bold createPost">Create Post</button> 
+                    <button type="submit" class="btn btn-outline-light btn-lg px-4 logOut" formaction="/logout" formmethod="GET">Log Out</button> 
+                </form>
+            </div> 
+        </div>
+    </div> 
+</div>
+
+</div>
+
+
+
+
+
+
+<% posts.forEach((item) => { %>
+<% console.log(item); %>
+
+<section class="postSection">
+    <div class="grid-item post <%= item.id %>">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary"><%= item.name %></h6>
+            <hr>
+            <p class="card-text"><%= item.post %></p>
+
+            <!-- <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a> -->
+            <% if (item.user_id == user.id) { %>
+            <form method="POST">
+                <button type="submit" name="editPostBtn" value=<%= item.id %> formaction="/edit-post" class="edit">EDIT</button>
+                <button type="submit" name="deletePostBtn" value=<%= item.id %> formaction="/delete-post">DELETE</button>
+            </form>
+            <% } %>
+            <h6>Posted on <%= item.date_of_post.toLocaleDateString(); %> at <%= item.time_of_post %></h6>
+        </div>
+    </div>
+
+</section>
+
+
+<% }); %>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<%- include("./partials/footer.ejs");  %>

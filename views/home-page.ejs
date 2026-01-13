@@ -1,0 +1,90 @@
+<%- include("./partials/header.ejs");  %>
+
+<div class="hero">
+
+<div class=" text-secondary px-4 py-5 text-center">
+    <div class="loginmsg">LOGGED IN AS <%= user.name %></div> 
+    <div class="py-5"> 
+        <h1 class="display-5 fw-bold mb-5">Home Page</h1> 
+        <div class="col-lg-6 mx-auto"> 
+            <p class="fs-5 mb-4"></p> 
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                
+    
+                <form class="heroBtns">
+                    
+                    <div class="postBoxTest">
+                        <textarea class="postBox d-none" placeholder="Write something.." name="postContent"></textarea>
+                        <div class="postBoxTestBtns">
+                            <button type="submit" class="postBtn d-none btn btn-outline-info btn-lg me-sm-3 px-4 fw-bold" formaction="/new-post" formmethod="POST">Post</button>
+                            <button type="button" class="cancelBtn d-none btn btn-outline-light btn-lg px-4">Cancel</button>
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-outline-info btn-lg me-sm-3 px-4 fw-bold createPostBtn">Create Post</button> 
+                    <button type="submit" class="btn btn-outline-light btn-lg px-4 logOutBtn" formaction="/logout" formmethod="GET">Log Out</button> 
+                </form>
+            </div> 
+        </div>
+    </div> 
+</div>
+
+</div>
+
+<section>
+
+    <div class="grid-container">
+
+        <% posts.forEach((item) => { %>
+
+            
+        
+        <div class="editArea d-none" id="<%= item.id %>">
+            <form action="/edit-post" method="POST">
+                <textarea class="editBox" name="editContent"><%= item.post %></textarea>
+                <button type="submit" name="editPostIndex" value=<%= item.id %> class="editAreaBtn btn btn-outline-light">Confirm</button>
+                <button type="button" class="cancelEdit editAreaBtn btn btn-outline-light">Cancel</button>
+            </form>
+        </div>
+
+
+        <div class="card-body post <%= item.id %>">
+
+            <!-- <h5 class="card-title">Card title</h5> -->
+            <h6 class="card-subtitle mb-2 text-body-secondary"><%= item.name %></h6>
+            <hr>
+            <p class="card-text"><%= item.post %></p>
+
+            <!-- <a href="#" class="card-link">Card link</a>-->
+
+
+        <!-- <div class="editArea d-none">
+            <form action="/edit-post" method="POST">
+                <textarea class="editBox" name="editContent"><%= item.post %></textarea>
+                <button type="submit" name="editPostIndex" value=<%= item.id %> class="confirmEdit editAreaBtn">Confirm</button>
+                <button type="button" class="cancelEdit editAreaBtn">Cancel</button>
+            </form>
+        </div> -->
+
+            <!--<a href="#" class="card-link">Another link</a> -->
+
+
+            <% if (item.user_id == user.id) { %>
+
+            <form method="POST" action="/delete-post">
+                <button type="button" id="test" name="editPostBtn" value=<%= item.id %> class="edit btn btn-outline-success">EDIT</button>
+                <button type="submit" name="deletePostBtn" value=<%= item.id %> class="delete btn btn-outline-danger">DELETE</button>
+            </form>
+            <% } %>
+            <h6>Posted on <%= item.date_of_post.toLocaleDateString(); %> at <%= item.time_of_post %></h6>
+        </div>
+        <% }); %>
+            
+    </div>
+
+    
+
+</section>
+
+<%- include("./partials/footer.ejs");  %>
