@@ -236,4 +236,8 @@ body {
 
   }
 
+  .createPostBtn, .logOutBtn {
+    margin: 0.5rem;
+  }
+
 }
