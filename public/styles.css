@@ -190,7 +190,7 @@ h1 {
   width: 98%;
   margin: 1rem;
   grid-template-columns: 2fr 2fr 2fr;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   gap: 20px;
 
 }
@@ -250,12 +250,4 @@ body {
     margin: 0.5rem;
   }
 
-<<<<<<< Updated upstream
 }
-=======
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 10b6485 (Added a show password btn)
->>>>>>> Stashed changes
