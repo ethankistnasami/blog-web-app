@@ -184,10 +184,13 @@ h1 {
 
 .grid-container {
   display: grid;
-  background-color: #3360DE;
+  /* background-color: #3360DE; */
+  background-color: #3D33DE;
+  animation: myGradient 5s linear 1s infinite alternate;
   width: 98%;
   margin: 1rem;
   grid-template-columns: 2fr 2fr 2fr;
+  border: 2px solid red;
   gap: 20px;
 
 }
@@ -217,7 +220,7 @@ body {
 
   .grid-container {
     grid-template-columns: 2fr 2fr;
-    margin: 0;
+    margin-left: 0.3rem;
     padding: 1rem;
 
   }

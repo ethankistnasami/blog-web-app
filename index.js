@@ -9,7 +9,7 @@ import { setTimeout as delay } from "node:timers/promises";
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const { Pool } = pg;
 const PgSession = pgSession(session);
 
