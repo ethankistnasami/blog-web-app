@@ -28,15 +28,13 @@
                 </div> 
 
                 <div class="form-floating mb-3"> 
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required> 
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required autocomplete="off">
                     <label for="floatingPassword">Password</label> 
+                    <button type="button" class="showPassword"></button>
                 </div>
+                
 
-                <!-- <div class="checkbox mb-3"> 
-                    <label> 
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label> 
-                </div> -->
+
                 <% if (locals.errorMessage) { %>
                  <!-- <div class="popupwindow"> <%= errorMessage %> <button class="popupclose">x</button> </div> -->
                   <div class="alert alert-warning" role="alert">

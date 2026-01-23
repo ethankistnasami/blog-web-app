@@ -4,6 +4,12 @@ integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbIT
 
 <script>
     console.log("JS LOADED");
+
+    //Show Password
+    document.querySelector(".showPassword").addEventListener("click", () => {
+        document.getElementById("floatingPassword").setAttribute("type", "text");
+    })
+
  
 //Creating a post
     document.querySelector(".createPostBtn").addEventListener("click", () => {
@@ -65,7 +71,7 @@ integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbIT
         });
     
 
-
+    
     
 
 
