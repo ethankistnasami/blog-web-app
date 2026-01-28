@@ -1,0 +1,348 @@
+:root {
+    --bg-body: #d3d3d3;
+    --bg-post: #ededed;
+    --bg-post-hover: wheat;
+    --hero-font-color: black;
+    --hero-image: url(./ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif);
+    --bg-contentBox: white;
+}
+
+body.dark {
+    --bg-body: #011526;
+    --bg-post: #266F8C;
+    --bg-post-hover: #4494A6;
+    --hero-font-color: white;
+    --hero-image: url(./ocean-night_Nero_AI_Image_Upscaler_Photo_Face.jpeg);
+    --bg-contentBox: wheat;
+
+
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+
+    }
+    100% {
+        opacity: 1;
+
+    }
+}
+
+@keyframes headerMoveUp {
+    0% {
+        transform: translateY(0);
+
+    }
+    100% {
+        transform: translateY(-1rem);
+
+    }
+}
+
+@keyframes headerMoveDown {
+    0% {
+        transform: translateY(-1em);
+
+    }
+    100% {
+        transform: translateY(0);
+
+    }
+}
+
+@keyframes postAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+}
+
+@keyframes deletePostAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+
+  }
+}
+
+.appearAnimation {
+    animation: appear 2s ease forwards;
+
+}
+
+.disappearAnimation {
+    animation: appear 2s ease forwards;
+    animation-direction: reverse;
+
+}
+
+.deleteAnimation {
+  animation: deletePostAnimation 3s ease forwards;
+
+}
+
+
+.headerMoveUpAnimation {
+    animation: headerMoveUp 2s ease forwards;
+
+}
+
+
+.headerMoveDownAnimation {
+    animation: headerMoveDown 2s ease forwards;
+
+}
+
+
+body {
+  font-family: "Libre Baskerville", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  background-color: var(--bg-body);
+
+}
+
+/* */
+.logInPage {
+    display: flex;
+    border: 2px solid red;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+/* */
+
+
+.heroFlexContainer {
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url(./ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif); */
+    /* background-image: url(./ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif); */
+    background-image: var(--hero-image);
+    background-position: center;
+    background-size: cover;
+}
+
+
+h1 {
+  font-size: 4rem;
+  color: var(--hero-font-color);
+  padding-bottom: 1rem;
+  margin-left: 1rem;
+  padding-top: 3rem;
+
+}
+  
+
+.heroBtnBox {
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    /* border: 2px solid green; */
+}
+
+.createPostBtn, .logOutBtn {
+    background-color: orange;
+    width: 8rem;
+    border-radius: 13px;
+    transform: scale(1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.postBtn, .cancelBtn {
+    background-color: orange;
+    width: 8rem;
+    border-radius: 13px;
+    transform: scale(1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.editPostBtn, .deletePostBtn, .confirmEditBtn, .cancelEditBtn {
+    border-radius: 10px;
+    margin-right: 0.3rem;
+    opacity: 0.6;
+    
+}
+
+
+.confirmCancelBox {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    
+}
+
+.confirmCancelBtns {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1rem;
+}
+
+button:hover {
+    transform: scale(1.05);  
+    box-shadow: 0 0 15px rgb(0, 0, 0.9); 
+}
+
+.hidden {
+    display: none;
+}
+
+.contentBox {
+    height: 10rem;
+    width: 30rem;
+    margin-bottom: 2rem;
+    resize: none;
+    white-space: pre-wrap;
+    background-color: var(--bg-contentBox);
+
+}
+
+.titleBox {
+    resize: none;
+    background-color: var(--bg-contentBox);
+
+}
+
+.loggedIn {
+    position: absolute;
+    left: 6rem;
+    top: 2rem;
+    margin-left: -4rem;
+    padding: 0;
+    color: var(--hero-font-color);
+}
+
+.dropdown-menu {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.gridContainer {
+    display: grid;
+    height: 100vh;
+    margin: 2rem;
+    align-items: center;
+    /* border: 2px solid purple; */
+    grid-template-columns: 2fr 2fr 2fr;
+    grid-template-rows: 2fr 2fr 2fr;
+    gap: 2rem;
+
+}
+
+.postBox {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.postCard {
+    animation: postAppear 2s ease;
+    border: 3px solid #795C34;
+    border-radius: 1rem;
+    display: flex;
+    background-color: var(--bg-post);
+    flex-direction: column;
+    padding: 1rem;
+    height: max-content;
+    transform: scale(1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.postCard:hover {
+  transform: scale(1.05); 
+    background-color: var(--bg-post-hover); 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+
+}
+
+.editBox {
+    resize: none;
+    background-color: whitesmoke;
+    overflow: hidden;
+    white-space: pre-wrap;
+    outline: transparent;
+    
+}
+
+.editBox:focus {
+    border-color: transparent;
+
+}
+
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .pageFooter {
+    display: flex;
+    height: 6rem;
+    border-top: 2px solid gray;
+    justify-content: center;
+    align-items: center;
+    color: var(--hero-font-color)
+} */
+
+@media (max-width: 1280px) {
+    .gridContainer {
+        grid-template-columns: 2fr 2fr;
+
+    }
+
+}
+
+
+@media (max-width: 660px) {
+    h1 {
+        font-size: 3rem;
+        padding-bottom: 4rem;
+
+    }
+
+    .heroFlexContainer {
+        height: 80vh;
+    }
+
+    .contentBox {
+        margin-bottom: 2rem;
+        height: 10rem;
+        width: 100%;
+
+    }
+
+    .titleBox {
+        resize: none;
+        
+    }
+
+    .loggedIn {
+        padding-left: 28px
+    }
+
+    .gridContainer {
+        grid-template-columns: 2fr;
+        gap: 3rem;
+
+    }
+
+}

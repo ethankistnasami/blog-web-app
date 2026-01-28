@@ -17,12 +17,12 @@ const saltRounds = 10;
 env.config();                     
 
 const db = new Pool({
-    // user: process.env.PG_USER,
-    // database: process.env.PG_DATABASE,
-    // host: process.env.PG_HOST,
-    // password: process.env.PG_PASSWORD,
-    // port: process.env.PG_PORT
-    connectionString: process.env.DATABASE_URL
+    user: process.env.PG_USER,
+    database: process.env.PG_DATABASE,
+    host: process.env.PG_HOST,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT
+    // connectionString: process.env.DATABASE_URL
     
 });
 
@@ -56,14 +56,6 @@ function checkAuth(req, res, next) {
     next();
 }
 
-// async function authenticateUser(userEmail, plainPassword) {
-//         const currentUser = await db.query("SELECT * FROM users WHERE email=$1", [userEmail]);
-        
-//         const isValid = bcrypt.compare(plainPassword, currentUser.rows[0].password);
-//         return isValid;
-
-// }
-
 function createUser(userName, userEmail, userPassword) {
     bcrypt.hash(userPassword, saltRounds, async (err, hash) => {
 
@@ -72,7 +64,6 @@ function createUser(userName, userEmail, userPassword) {
 
         } else {
             console.log("Hashed Password: ", hash);
-            // currentUser = new User(1, req.body.name, req.body.email, hash);
             await db.query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)", [userName, userEmail, hash]);
         }        
     });
@@ -105,25 +96,23 @@ app.get("/create-acc", (req, res) => {
 
 
 app.get("/home", checkAuth, async (req, res) => {
-    const result = await db.query("SELECT post.id, user_id, name, post, date_of_post, time_of_post FROM post JOIN users ON users.id = post.user_id ORDER BY id ASC");
-    // SELECT users.id, email, post FROM posts JOIN users ON users.id = posts.id;
-    //console.log("Request session is: ", req.session);
-    
-    res.render("home-page.ejs", {posts: result.rows, user: req.session.user, editContent: null, editMode: false});
+    const result = await db.query("SELECT posts.id, user_id, name, title, content, created_at FROM posts JOIN users ON users.id = posts.user_id ORDER BY id ASC");
+
+    res.render("sandbox.ejs", {posts: result.rows, user: req.session.user});
     
 });
 
 
 
 
-
+//EDIT THIS
 app.post("/new-post", async (req, res) => {
-    var currentDate = new Date();
-    req.session.user.post = req.body.postContent;
+    // var currentDate = new Date();
+    // req.session.user.post = req.body.postContent;
     // res.send(req.body.postContent);
-    const result = await db.query("INSERT INTO post (user_id, post, time_of_post, date_of_post) VALUES($1, $2, $3, $4)", [req.session.user.id, req.session.user.post, currentDate.toLocaleTimeString(), currentDate.toLocaleDateString()]);
-    console.log(currentDate.toLocaleTimeString());
-    console.log(currentDate.toLocaleDateString());
+    const result = await db.query("INSERT INTO posts (user_id, title, content) VALUES($1, $2, $3)", [req.session.user.id, req.body.titleContent.trim(), req.body.postContent.trim()]);
+    // console.log(currentDate.toLocaleTimeString());
+    // console.log(currentDate.toLocaleDateString());
     res.redirect("/home");
 });
 
@@ -153,7 +142,7 @@ app.post("/new-user", async (req, res) => {
 
         //WHEN DB IS EMPTY 
         if (result.rows[0] == null) {
-            console.log("initiated");
+            // console.log("initiated");
             createUser(req.body.name, req.body.email, req.body.password);
             return res.render("home.ejs", {submitBtn: "Log In", signupForm: false, btnAction: "/login", errorMessage: "Account successfully created. Try logging in"});
 
@@ -221,36 +210,6 @@ app.post("/login", async (req, res) => {
 
         }
 
-        // const currentUser = await db.query("SELECT * FROM users WHERE email=$1", [req.body.email]);
-        
-        // bcrypt.compare(req.body.password, currentUser.rows[0].password, (err, result) => {
-
-        //     if (err) {
-        //         console.log("Error Comparing Passwords: ", err);
-
-        //     } else {
-        //         console.log("Authenticated: ", result);
-
-        //         console.log(result);
-    
-        //         if (result) {
-
-        //             req.session.user = {
-        //                 id: currentUser.rows[0].id,
-        //                 name: currentUser.rows[0].name,
-        //                 email: currentUser.rows[0].email
-        //             }
-
-        //             res.redirect("/home");
-        //             console.log("User Authenticated");
-
-        //         } else {
-        //             console.log("User Not Authenticated");
-        //             res.render("home.ejs", {submitBtn: "Log In", signupForm: false, btnAction: "/login", errorMessage: "Incorrect credentials. Please try again"});
-
-        //         }
-        //     }
-        // })
     }
 
 });
@@ -258,8 +217,8 @@ app.post("/login", async (req, res) => {
 
 //DELETE & EDIT ROUTES WITHOUT METHOD-OVERRIDE
 app.post("/delete-post", checkAuth, async (req, res) => {
-    await delay(2000); 
-    db.query("DELETE FROM post WHERE id=$1", [req.body.deletePostBtn]);
+    // await delay(2000); 
+    db.query("DELETE FROM posts WHERE id=$1", [req.body.deletePostBtn]);
     res.redirect("/home");
 
 });
@@ -268,7 +227,7 @@ app.post("/delete-post", checkAuth, async (req, res) => {
 
 app.post("/edit-post", checkAuth, async (req, res) => {
     //const resultTwo = await db.query("SELECT post FROM post WHERE id=$1", [req.body.editPostBtn]);
-    const result = await db.query("UPDATE post SET post =$1 WHERE id=$2", [req.body.editContent, req.body.editPostIndex]);
+    const result = await db.query("UPDATE posts SET content =$1 WHERE id=$2", [req.body.editContent, req.body.editPostIndex]);
     console.log(req.body.editContent, req.body.editPostIndex);
     res.redirect("/home");
     //res.render("home-page.ejs", {posts: result.rows, user: req.session.user, editContent: result.rows[0].post, editMode: true, editedPostIndex: req.body.editPostBtn});

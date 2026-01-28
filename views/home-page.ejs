@@ -2,9 +2,11 @@
 
 <div class="hero">
 
-<div class=" text-secondary px-4 py-5 text-center">
+<div class=" text-secondary text-center">
     <div class="loginmsg">LOGGED IN AS <%= user.name %></div> 
-    <div class="py-5"> 
+    <div class="py-5">
+        
+        <!-- <img src="/ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif" alt="ocean"> -->
         <h1 class="display-5 fw-bold mb-5">Home Page</h1> 
         <div class="col-lg-6 mx-auto"> 
             <p class="fs-5 mb-4"></p> 
@@ -21,7 +23,6 @@
                         </div>
                     </div>
 
-
                     <button type="button" class="btn btn-outline-info btn-lg me-sm-3 px-4 fw-bold createPostBtn">Create Post</button> 
                     <button type="submit" class="btn btn-outline-light btn-lg px-4 logOutBtn" formaction="/logout" formmethod="GET">Log Out</button> 
                 </form>
@@ -31,7 +32,7 @@
 </div>
 
 </div>
-
+<hr>
 <section>
 
     <div class="grid-container">
@@ -56,19 +57,7 @@
             <hr>
             <p class="card-text"><%= item.post %></p>
 
-            <!-- <a href="#" class="card-link">Card link</a>-->
-
-
-        <!-- <div class="editArea d-none">
-            <form action="/edit-post" method="POST">
-                <textarea class="editBox" name="editContent"><%= item.post %></textarea>
-                <button type="submit" name="editPostIndex" value=<%= item.id %> class="confirmEdit editAreaBtn">Confirm</button>
-                <button type="button" class="cancelEdit editAreaBtn">Cancel</button>
-            </form>
-        </div> -->
-
-            <!--<a href="#" class="card-link">Another link</a> -->
-
+          
 
             <% if (item.user_id == user.id) { %>
 

@@ -2,81 +2,118 @@
 integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <script>
-    console.log("JS LOADED");
 
-    //Show Password
-   // document.querySelector(".showPassword").addEventListener("click", () => {
-   //     document.getElementById("floatingPassword").setAttribute("type", "text");
-   // })
+    const body = document.body;
 
- 
-//Creating a post
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        body.classList.add("dark");
+    }
+
     document.querySelector(".createPostBtn").addEventListener("click", () => {
-        document.querySelector(".postBox").classList.remove("d-none");
-        document.querySelector(".postBtn").classList.remove("d-none");
-        document.querySelector(".cancelBtn").classList.remove("d-none");
 
-        document.querySelector(".createPostBtn").classList.add("d-none");
-        document.querySelector(".logOutBtn").classList.add("d-none");
-    });
+        document.querySelector("h1").classList.add("headerMoveUpAnimation");
+        document.querySelector("h1").classList.remove("headerMoveDownAnimation");
 
-    //Cancelling a create post request
+
+        document.querySelector(".titleBox").classList.add("appearAnimation");
+        document.querySelector(".contentBox").classList.add("appearAnimation");
+        document.querySelector(".postBtn").classList.add("appearAnimation");
+        document.querySelector(".cancelBtn").classList.add("appearAnimation");
+
+
+        document.querySelector(".titleBox").classList.remove("hidden");
+        document.querySelector(".contentBox").classList.remove("hidden");
+        document.querySelector(".postBtn").classList.remove("hidden");
+        document.querySelector(".cancelBtn").classList.remove("hidden");
+        document.querySelector(".createPostBtn").classList.add("hidden");
+        document.querySelector(".logOutBtn").classList.add("hidden");
+
+            
+    }); 
+
     document.querySelector(".cancelBtn").addEventListener("click", () => {
-        document.querySelector(".postBox").classList.add("d-none");
-        document.querySelector(".postBtn").classList.add("d-none");
-        document.querySelector(".cancelBtn").classList.add("d-none");
-        
-        document.querySelector(".createPostBtn").classList.remove("d-none");
-        document.querySelector(".logOutBtn").classList.remove("d-none");
+
+
+        document.querySelector("h1").classList.add("headerMoveDownAnimation");
+        document.querySelector("h1").classList.remove("headerMoveUpAnimation");
+        document.querySelector(".titleBox").classList.add("disappearappearAnimation");
+        document.querySelector(".contentBox").classList.add("disappearappearAnimation");
+        document.querySelector(".postBtn").classList.add("disappearappearAnimation");
+        document.querySelector(".cancelBtn").classList.add("disappearappearAnimation");
+
+        document.querySelector(".titleBox").classList.remove("appearAnimation");
+        document.querySelector(".contentBox").classList.remove("appearAnimation");
+        document.querySelector(".postBtn").classList.remove("appearAnimation");
+        document.querySelector(".cancelBtn").classList.remove("appearAnimation");
+
+
+        document.querySelector(".titleBox").classList.add("hidden");
+        document.querySelector(".contentBox").classList.add("hidden");
+        document.querySelector(".postBtn").classList.add("hidden");
+        document.querySelector(".cancelBtn").classList.add("hidden");
+        document.querySelector(".createPostBtn").classList.remove("hidden");
+        document.querySelector(".logOutBtn").classList.remove("hidden");
     });
-    
 
-    //Edit Posts
-    document.querySelectorAll(".edit").forEach((post) => {
-            post.addEventListener("click", () => {
+
+    document.querySelectorAll(".editPostBtn").forEach((post) => {
+            
+        post.addEventListener("click", (e) => {
                 
-                var postID = event.target.value;
-                document.getElementsByClassName(postID)[0].classList.add("d-none");
-                document.getElementById(postID).classList.remove("d-none");
-
-                //Cancel edit 
-                document.querySelectorAll(".cancelEdit").forEach((cancelEditBtn) => {
-                    cancelEditBtn.addEventListener("click", () => {
-                        document.getElementsByClassName(postID)[0].classList.remove("d-none");
-                        document.getElementById(postID).classList.add("d-none");
-
-                    })
-
-            });
+            var currentPost = e.target.closest(".postCard");
+            var height = currentPost.querySelector(".postContent").offsetHeight + 50;
 
 
+            currentPost.querySelector(".postContent").classList.add("hidden");
+            currentPost.querySelector(".editBox").style.minHeight = height + "px";
+            currentPost.querySelector(".editBox").classList.remove("hidden");
+            currentPost.querySelector("em").classList.add("hidden");
+
+            currentPost.querySelector(".editDeleteBox").classList.add("hidden");
+            currentPost.querySelector(".confirmCancelBox").classList.remove("hidden");
+
+
+            currentPost.querySelector(".cancelEditBtn").addEventListener("click", () => {
+
+                currentPost.querySelector(".postContent").classList.remove("hidden");
+                currentPost.querySelector(".editBox").classList.add("hidden");
+                currentPost.querySelector("em").classList.remove("hidden");
+
+                currentPost.querySelector(".editDeleteBox").classList.remove("hidden");
+                currentPost.querySelector(".confirmCancelBox").classList.add("hidden");
+                    
             })
 
+            
+        })
 
+    })
 
+    document.querySelectorAll(".deletePostBtn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+
+        
+
+        setTimeout(() => {
+            const postCard = e.target.closest(".postCard");
+            postCard.classList.add("deleteAnimation");
+        }, 3000); 
+        });
         });
 
+    document.querySelector(".darkModeBtn").addEventListener("click", () => {
+        document.querySelector("body").classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    })
+
+    document.querySelector(".lightModeBtn").addEventListener("click", () => {
+        document.querySelector("body").classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    })
 
 
-    //Delete Posts
-    document.querySelectorAll(".delete").forEach((post) => {
-            post.addEventListener("click", () => {
-
-                var postID = event.target.value;
-                document.getElementsByClassName(postID)[0].classList.add("deleteAnimation");
-
-            });
-
-        });
-    
-
-    
-    
-
-
-
-
-    
 </script>
 
 </body>
