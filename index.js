@@ -98,7 +98,7 @@ app.get("/create-acc", (req, res) => {
 app.get("/home", checkAuth, async (req, res) => {
     const result = await db.query("SELECT posts.id, user_id, name, title, content, created_at FROM posts JOIN users ON users.id = posts.user_id ORDER BY id ASC");
 
-    res.render("sandbox.ejs", {posts: result.rows, user: req.session.user});
+    res.render("home-page.ejs", {posts: result.rows, user: req.session.user});
     
 });
 
