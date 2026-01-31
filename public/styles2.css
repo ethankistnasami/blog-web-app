@@ -366,8 +366,8 @@ footer {
     }
 
     .gridContainer {
-        align-items: start;
         grid-template-columns: 2fr;
+        grid-auto-rows: min-content;
         gap: 2rem;
 
     }
