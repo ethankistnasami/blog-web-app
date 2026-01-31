@@ -116,6 +116,10 @@ body {
 
 }
 
+.dashboard-title {
+    color: var(--hero-font-color);
+}
+
 /* */
 .logInPage {
     display: flex;
@@ -132,8 +136,6 @@ body {
     height: 80vh;
     justify-content: center;
     align-items: center;
-    /* background-image: url(./ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif); */
-    /* background-image: url(./ocean2_Nero_AI_Image_Upscaler_Photo_Face.avif); */
     background-image: var(--hero-image);
     background-position: center;
     background-size: cover;
@@ -182,6 +184,17 @@ h1 {
     
 }
 
+.editDeleteBox {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.deletePostBtn {
+    margin-left: 0.5rem;
+    margin-right: 0rem;
+}
+
 
 .confirmCancelBox {
     display: flex;
@@ -211,12 +224,16 @@ button:hover {
     margin-bottom: 2rem;
     resize: none;
     white-space: pre-wrap;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
     background-color: var(--bg-contentBox);
 
 }
 
 .titleBox {
     resize: none;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
     background-color: var(--bg-contentBox);
 
 }
@@ -237,10 +254,9 @@ button:hover {
 
 .gridContainer {
     display: grid;
-    height: 100vh;
+    min-height: 100vh;
     margin: 2rem;
     align-items: center;
-    /* border: 2px solid purple; */
     grid-template-columns: 2fr 2fr 2fr;
     grid-template-rows: 2fr 2fr 2fr;
     gap: 2rem;
@@ -276,6 +292,7 @@ button:hover {
 
 .editBox {
     resize: none;
+    border-radius: 0.5rem;
     background-color: whitesmoke;
     overflow: hidden;
     white-space: pre-wrap;
@@ -294,14 +311,21 @@ button:hover {
     justify-content: space-between;
 }
 
-/* .pageFooter {
-    display: flex;
-    height: 6rem;
-    border-top: 2px solid gray;
-    justify-content: center;
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     align-items: center;
-    color: var(--hero-font-color)
-} */
+    min-height: 3.5rem;
+    border: none;
+    background-color: var(--bg-post);
+
+}
+
+.footer-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
 
 @media (max-width: 1280px) {
     .gridContainer {
@@ -341,7 +365,8 @@ button:hover {
 
     .gridContainer {
         grid-template-columns: 2fr;
-        gap: 3rem;
+        grid-template-rows: 2fr;
+        gap: 2.5rem;
 
     }
 
